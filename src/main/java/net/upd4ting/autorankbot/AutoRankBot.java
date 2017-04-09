@@ -127,7 +127,7 @@ public class AutoRankBot {
         System.exit(0);
 	}
 	
-	private static void save() {
+	public static void save() {
 		File f = new File("data.json");
 		try {
 			f.createNewFile();

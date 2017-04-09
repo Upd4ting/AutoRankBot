@@ -60,7 +60,7 @@ public class BotListener extends ListenerAdapter {
 		String message = e.getMessage().getRawContent();
 		MessageChannel channel = e.getChannel();
 		
-		if (!channel.getId().equals("300618169767428099"))
+		if (!channel.getId().equals("300618169767428099") && !channel.getId().equals("297722160309338112"))
 			return;
 		
         if (message.startsWith("!register ")) {
@@ -103,8 +103,10 @@ public class BotListener extends ListenerAdapter {
         		AutoRankBot.getDiscordUser().add(discordName);
         		
         		channel.sendMessage(e.getAuthor().getAsMention() + " You got ranked to 'Client'. Thanks for supporting us!").queue();
+        		
+        		AutoRankBot.save();
         	}
-        } else {
+        } else if (!e.getAuthor().getName().equals(AutoRankBot.getJDA().getSelfUser().getName()) && !channel.getId().equals("297722160309338112")) {
         	e.getMessage().delete().queue();
         	e.getAuthor().getPrivateChannel().sendMessage(e.getAuthor().getAsMention() + " You should not talk in this channel!").queue();
         }
