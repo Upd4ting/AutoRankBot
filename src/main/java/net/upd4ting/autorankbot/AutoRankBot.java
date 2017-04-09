@@ -63,6 +63,8 @@ public class AutoRankBot {
 			e.printStackTrace();
 		}
 		
+		jda.getTextChannelById("297722160309338112").sendMessage("I'm up guys!").queue();
+		
 		Console.info("Initializing SpigotAPI ...");
 		
         new SpigotSiteCore();

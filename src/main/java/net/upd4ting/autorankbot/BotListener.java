@@ -60,6 +60,9 @@ public class BotListener extends ListenerAdapter {
 		String message = e.getMessage().getRawContent();
 		MessageChannel channel = e.getChannel();
 		
+		if (!channel.getId().equals("300618169767428099"))
+			return;
+		
         if (message.startsWith("!register ")) {
         	String buyerName = message.replaceAll("!register ", "");
         	String discordName = e.getAuthor().getName();
@@ -101,6 +104,9 @@ public class BotListener extends ListenerAdapter {
         		
         		channel.sendMessage(e.getAuthor().getAsMention() + " You got ranked to 'Client'. Thanks for supporting us!").queue();
         	}
+        } else {
+        	e.getMessage().delete().queue();
+        	e.getAuthor().getPrivateChannel().sendMessage(e.getAuthor().getAsMention() + " You should not talk in this channel!").queue();
         }
 	}
 }
