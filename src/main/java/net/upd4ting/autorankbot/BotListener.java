@@ -108,6 +108,7 @@ public class BotListener extends ListenerAdapter {
         	}
         } else if (!e.getAuthor().getName().equals(AutoRankBot.getJDA().getSelfUser().getName()) && !channel.getId().equals("297722160309338112")) {
         	e.getMessage().delete().queue();
+        	e.getAuthor().openPrivateChannel().queue();
         	e.getAuthor().getPrivateChannel().sendMessage(e.getAuthor().getAsMention() + " You should not talk in this channel!").queue();
         }
 	}
