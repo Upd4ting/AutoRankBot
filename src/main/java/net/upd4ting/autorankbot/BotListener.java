@@ -1,5 +1,7 @@
 package net.upd4ting.autorankbot;
 
+import java.util.ArrayList;
+
 import be.maximvdw.spigotsite.api.exceptions.ConnectionFailedException;
 import be.maximvdw.spigotsite.api.user.User;
 import be.maximvdw.spigotsite.api.user.exceptions.InvalidCredentialsException;
@@ -71,18 +73,18 @@ public class BotListener extends ListenerAdapter {
         	boolean used = false;
         	boolean exist = false;
         	
-        	for (String u : AutoRankBot.getDiscordUser()) {
+        	for (String u : new ArrayList<>(AutoRankBot.getDiscordUser())) {
         		if (u.equalsIgnoreCase(discordName))
         			registred = true;
         	}
         	
-        	for (String u : AutoRankBot.getUsedBuyers()) {
+        	for (String u : new ArrayList<>(AutoRankBot.getUsedBuyers())) {
         		if (u.equalsIgnoreCase(buyerName)) {
         			used = true;
         		}
         	}
         	
-        	for (User u : AutoRankBot.getBuyers()) {
+        	for (User u : new ArrayList<>(AutoRankBot.getBuyers())) {
         		if (u.getUsername().equalsIgnoreCase(buyerName)) {
         			exist = true;
         		}
@@ -107,8 +109,8 @@ public class BotListener extends ListenerAdapter {
         		AutoRankBot.save();
         	}
         } else if (!e.getAuthor().getName().equals(AutoRankBot.getJDA().getSelfUser().getName()) && !channel.getId().equals("297722160309338112")) {
-        	e.getMessage().delete().queue();
-        	e.getAuthor().openPrivateChannel().queue();
+        	e.getMessage().delete().complete();
+        	e.getAuthor().openPrivateChannel().complete();
         	e.getAuthor().getPrivateChannel().sendMessage(e.getAuthor().getAsMention() + " You should not talk in this channel!").queue();
         }
 	}

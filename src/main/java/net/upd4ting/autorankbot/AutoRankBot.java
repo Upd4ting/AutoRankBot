@@ -102,12 +102,12 @@ public class AutoRankBot {
 					} catch (ConnectionFailedException e1) {
 						e1.printStackTrace();
 					}
-        		}
-        		
-        		try {
-        			Thread.sleep(30000); // 30 seconds
-        		} catch (InterruptedException e) {
-        			e.printStackTrace();
+					
+	        		try {
+	        			Thread.sleep(30000); // 30 seconds
+	        		} catch (InterruptedException e) {
+	        			e.printStackTrace();
+	        		}
         		}
         	}
         });
@@ -123,8 +123,6 @@ public class AutoRankBot {
         Console.info("Saving data ...");
         save();
         Console.info("Saving finished!");
-        
-        System.exit(0);
 	}
 	
 	public static void save() {
