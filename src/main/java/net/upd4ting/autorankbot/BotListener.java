@@ -94,7 +94,7 @@ public class BotListener extends ListenerAdapter {
         		channel.sendMessage(e.getAuthor().getAsMention() + " You are already registred!").queue();
         	}
         	else if (!exist) {
-        		channel.sendMessage(e.getAuthor().getAsMention() + " This spigot username doesn't exist or haven't buy our premium ressource!").queue();
+        		channel.sendMessage(e.getAuthor().getAsMention() + " This spigot username doesn't exist or you haven't bought our premium resource.").queue();
         	} else if (used) {
         		channel.sendMessage(e.getAuthor().getAsMention() + " This spigot username is already used!").queue();
         	} else if (exist && !used) {
@@ -104,7 +104,7 @@ public class BotListener extends ListenerAdapter {
         		AutoRankBot.getUsedBuyers().add(buyerName);
         		AutoRankBot.getDiscordUser().add(discordName);
         		
-        		channel.sendMessage(e.getAuthor().getAsMention() + " You got ranked to 'Client'. Thanks for supporting us!").queue();
+        		channel.sendMessage(e.getAuthor().getAsMention() + " You have been moved to the 'Client' rank. This rank will get you support faster and better.").queue();
         		
         		AutoRankBot.save();
         	}
