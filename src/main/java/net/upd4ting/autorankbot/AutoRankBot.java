@@ -91,6 +91,7 @@ public class AutoRankBot {
 		        	                            .getResourceManager()
 		        	                            .getPremiumResourceBuyers(
 		        	                                    (PremiumResource) res, u);
+		        	                    buyers.clear();
 		        	                    buyers.addAll(resourceBuyers);
 		        	                } catch (ConnectionFailedException e) {
 		        	                    e.printStackTrace();
