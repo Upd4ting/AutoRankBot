@@ -42,7 +42,7 @@ public class AutoRankBot {
 	
 	private static JDA jda;
 	private static List<User> users = new ArrayList<>();
-	private static Set<Buyer> buyers = new HashSet<>();
+	private static List<Buyer> buyers = new ArrayList<>();
 	private static Set<String> usedBuyers = new HashSet<>();
 	private static Set<String> discordUser = new HashSet<>();
 	private static boolean running = true;
@@ -79,20 +79,29 @@ public class AutoRankBot {
         	public void run() {
         		while (running) {
 					try {
+						
+						Console.info("Getting buyers...");
+						
+						List<Buyer> newList = new ArrayList<>();
+						
 						for (User u : new ArrayList<>(users)) {
 							List<Resource> resources = SpigotSite.getAPI().getResourceManager()
 							        .getResourcesByUser(u);
 							
 		        	        for (Resource res : resources) {
 		        	            if (res instanceof PremiumResource) {
+		        	            	
+		        	            	Console.info("Getting buyers of " + u.getUsername() + " from " + res.getResourceName());
+		        	            	
 		        	                try {
 		        	                    List<Buyer> resourceBuyers = SpigotSite
 		        	                            .getAPI()
 		        	                            .getResourceManager()
 		        	                            .getPremiumResourceBuyers(
 		        	                                    (PremiumResource) res, u);
-		        	                    buyers.clear();
-		        	                    buyers.addAll(resourceBuyers);
+		        	                    newList.addAll(resourceBuyers);
+		        	              
+		        	                    Console.info(resourceBuyers.size() + " buyers found!");
 		        	                } catch (ConnectionFailedException e) {
 		        	                    e.printStackTrace();
 		        	                    return;
@@ -100,6 +109,11 @@ public class AutoRankBot {
 		        	            }
 		        	        }
 						}
+						
+						Console.info("Finished, found " + newList.size() + " buyers in total...");
+						
+						// Switching to new
+						buyers = new ArrayList<>(newList);
 					} catch (ConnectionFailedException e1) {
 						e1.printStackTrace();
 					}
@@ -190,13 +204,15 @@ public class AutoRankBot {
     	User u = SpigotSite.getAPI().getUserManager()
                 .authenticate(username, password, totpSecret);
     	
-    	if (u != null)
+    	if (u != null) {
     		users.add(u);
+    		Console.info("Succeed for " + username);
+    	}
 	}
 	
 	public static JDA getJDA() { return jda; }
 	public static List<User> getUsers() { return users; }
-	public static Set<Buyer> getBuyers() { return buyers; }
+	public static List<Buyer> getBuyers() { return buyers; }
 	public static Set<String> getUsedBuyers() { return usedBuyers; }
 	public static Set<String> getDiscordUser() { return discordUser; }
 }

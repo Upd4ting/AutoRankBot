@@ -73,6 +73,8 @@ public class BotListener extends ListenerAdapter {
         	boolean used = false;
         	boolean exist = false;
         	
+        	Console.info("Trying to register " + buyerName);
+        	
         	for (String u : new ArrayList<>(AutoRankBot.getDiscordUser())) {
         		if (u.equalsIgnoreCase(discordName))
         			registred = true;
@@ -83,7 +85,7 @@ public class BotListener extends ListenerAdapter {
         			used = true;
         		}
         	}
-        	
+        	        	
         	for (User u : new ArrayList<>(AutoRankBot.getBuyers())) {
         		if (u.getUsername().equalsIgnoreCase(buyerName)) {
         			exist = true;
